@@ -8,7 +8,9 @@ def raise_error(error):
 	print(f'error:{error}')
 
 def checkType(file):
-	return file[-3:] == 'py'
+	if(not file[-3:] == '.py'):
+		raise_error(TYPE_ERROR_MESSAGE)
+		sys.exit()
 
 def parse():
 	parser = argparse.ArgumentParser()
@@ -27,10 +29,8 @@ def run():
 
 	(file_path, file_name) = parse()
 	
-	if(not checkType(file_name)):
-		raise_error(TYPE_ERROR_MESSAGE)
-		sys.exit()
-
+	checkType(file_name)
+	
 
 if __name__ == '__main__':
 	sys.exit()
