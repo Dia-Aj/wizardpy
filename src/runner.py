@@ -12,6 +12,14 @@ def checkType(file):
 		raise_error(TYPE_ERROR_MESSAGE)
 		sys.exit()
 
+def check_path(path):
+	if(path != os.getcwd()):
+		try:
+			os.chdir(path)
+		except FileNotFoundError as err:
+			raiseError(err)
+			sys.exit()
+
 def parse():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('FILENAME', type = str, 
@@ -30,7 +38,8 @@ def run():
 	(file_path, file_name) = parse()
 	
 	checkType(file_name)
-	
+	check_path(file_path)
+
 
 if __name__ == '__main__':
 	sys.exit()
