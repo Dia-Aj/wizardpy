@@ -5,6 +5,9 @@ import os
 def raise_error(error):
 	print(f'error:{error}')
 
+def checkType(file):
+	return file[-3:] == 'py'
+
 def parse():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('FILENAME', type = str, 
@@ -20,7 +23,8 @@ def parse():
 
 def run():
 	(file_path, file_name) = parse()
-	print(file_path, file_name)
+	
+
 
 if __name__ == '__main__':
 	sys.exit()
