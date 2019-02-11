@@ -1,3 +1,4 @@
+
 import sys
 import argparse
 import os
@@ -25,7 +26,7 @@ def check_path(path):
 		try:
 			os.chdir(path)
 		except FileNotFoundError as err:
-			raiseError(err)
+			raise_error(err)
 			sys.exit()
 
 def check_code(file):
