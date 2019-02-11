@@ -2,6 +2,8 @@ import sys
 import argparse
 import os
 
+TYPE_ERROR_MESSAGE = ':expected python type file\nEnter __name__ -h for more information'
+
 def raise_error(error):
 	print(f'error:{error}')
 
@@ -22,10 +24,11 @@ def parse():
 	return (args.filepath, args.FILENAME)
 
 def run():
+
 	(file_path, file_name) = parse()
 	
 	if(not checkType(file_name)):
-		raise_error(':expected python type file\nEnter __name__ -h for more information')
+		raise_error(TYPE_ERROR_MESSAGE)
 		sys.exit()
 
 
