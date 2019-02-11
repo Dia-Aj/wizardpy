@@ -20,6 +20,10 @@ def check_path(path):
 			raiseError(err)
 			sys.exit()
 
+def check_code(file):
+	if(os.system(f'python -m py_compile {file}')): #returns true when the the code has error
+		sys.exit()
+
 def parse():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('FILENAME', type = str, 
@@ -39,6 +43,7 @@ def run():
 	
 	checkType(file_name)
 	check_path(file_path)
+	check_code(file_name)
 
 
 if __name__ == '__main__':
