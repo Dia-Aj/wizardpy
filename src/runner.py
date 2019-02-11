@@ -7,7 +7,7 @@ TYPE_ERROR_MESSAGE = ':expected python type file\nEnter __name__ -h for more inf
 def raise_error(error):
 	print(f'error:{error}') #format error message
 
-def checkType(file):
+def check_type(file):
 	""" to ensure the passed file type isn't
 		anything other than python type. Otherwise, 
 		it stops the programme from executing. """
@@ -62,7 +62,7 @@ def run():
 	(file_path, file_name) = parse()
 	
 	""" required steps before proceeding into the code """
-	checkType(file_name)
+	check_type(file_name)
 	check_path(file_path)
 	check_code(file_name)
 
