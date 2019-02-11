@@ -2,6 +2,9 @@ import sys
 import argparse
 import os
 
+def raise_error(error):
+	print(f'error:{error}')
+
 def parse():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('FILENAME', type = str, 
