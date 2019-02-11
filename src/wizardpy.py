@@ -5,5 +5,5 @@ import runner
 def main():
 	runner.run() 
 
-if __main__ == '__main__':
+if __name__ == '__main__':
 	main()
