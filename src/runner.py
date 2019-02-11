@@ -24,6 +24,9 @@ def parse():
 def run():
 	(file_path, file_name) = parse()
 	
+	if(not checkType(file_name)):
+		raise_error(':expected python type file\nEnter __name__ -h for more information')
+		sys.exit()
 
 
 if __name__ == '__main__':
