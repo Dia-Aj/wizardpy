@@ -21,7 +21,7 @@ class exp:
 	#the regex patteren
 	pattern : repr 
 
-	def __init__(self, name, type, description, pattern):
+	def __init__(self, name, type, pattern, description = None):
 		self.name = name
 		self.type = type
 		self.description = description
