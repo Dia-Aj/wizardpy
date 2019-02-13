@@ -1,5 +1,5 @@
 from expression import exp
-from data import regex # EXPRESSIONS DIRECTORY
+from data import regex
 import sys
 
 data = regex
@@ -16,9 +16,6 @@ class Regex:
 		for re in data
 	]
 	_numberOfRegex = len(_data) #Count the overall number of the regular expressions
-
-	def __repr__(self):
-		return f'{Regex.__name__}(name, pattern = None, type = None, description = None)'
 
 	def __len__(self):
 		return Regex._numberOfRegex
