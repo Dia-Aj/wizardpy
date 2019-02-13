@@ -1,30 +1,25 @@
-from expression import exp
-from data import regex
 import sys
 
-data = regex
+functions = {}
+def log_function(function):
+	functions.setdefault(function.__name__, function)
 
-class Regex:
-	
-	_data = [
-		exp(re, data[re][0], data[re][1], data[re][2])
-		for re in data
-	] # holds all patterns
-	_numberOfRegex = len(_data) #Count the overall number of the regular expressions
+class optimizer:
 
-	def __repr__(self):
-		return f'{Regex.__name__}(name, pattern, type, description = None)'
-
-	def __len__(self):
-		return Regex._numberOfRegex
+	def __str__(self):
+		pass
 
 	@staticmethod
-	def find_matches(self, string):
-		pass 
+	def optimize():
+		pass
 
+	@log_function
+	def function(self):
+		pass
 
-def main():
-	pass
+	def sub_code(self, new_string):
+		pass
+
 
 if __name__ == '__main__':
-	main()
+	sys.exit()
