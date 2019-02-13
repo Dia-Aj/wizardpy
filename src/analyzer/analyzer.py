@@ -1,8 +1,8 @@
 from expression import exp
-#from data import regex # EXPRESSIONS DIRECTORY
+from data import regex # EXPRESSIONS DIRECTORY
 import sys
 
-#data = regex
+data = regex
 
 class Regex:
 	'''Holds all the regular expression inside data.py file
