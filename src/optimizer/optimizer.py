@@ -1,11 +1,16 @@
 import sys
 
 functions = {}
+
+"""Log each function into functions dictionary.
+   the rationale behind this is to map harmful 
+   codes into the fixing function by regex name """
 def log_function(function):
 	functions.setdefault(function.__name__, function)
 
 class optimizer:
-
+	"""takes the passed harmfull code and returns
+	   the idiomatic code"""
 	def __str__(self):
 		pass
 
