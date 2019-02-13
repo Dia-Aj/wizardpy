@@ -14,7 +14,7 @@ class Regex:
 	_data = [
 		exp(re, data[re][0], data[re][1], data[re][2])
 		for re in data
-	]
+	] #exp(name, type, pattern, description)
 	_numberOfRegex = len(_data) #Count the overall number of the regular expressions
 
 	def __len__(self):
