@@ -1,8 +1,10 @@
 from analyzer.expression import exp
 from analyzer.data import regex
 import sys
+import re
 
 data = regex
+ERR_RE_MSG = 'Error: invalid regular expression'
 
 class Regex:
 	
@@ -22,8 +24,18 @@ class Regex:
 		return Regex._numberOfRegex
 
 	@staticmethod
-	def find_matches(string):
-		pass
+	def read_code(file):
+		with open(file) as f:
+			content = file.read()
+
+		return content
+
+	@staticmethod
+	def find_matches(code_file):
+		code = read_code(code_file)
+		for regex in _data:
+			if(not re.search(pattern)):
+				continue
 
 
 if __name__ == '__main__':
