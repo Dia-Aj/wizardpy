@@ -50,6 +50,9 @@ class Regex:
 
 	@staticmethod
 	def check_regex(code):
+		'''Run over all the regular expression inside _data and check
+		   there validity, then passes the expression to find_matches()
+		   modular if any there's any match.'''
 		for regex in _data:
 			pattern = compile_regex(regex)
 			if(not pattern.search(code)): continue
@@ -58,6 +61,8 @@ class Regex:
 
 	@staticmethod
 	def main(code_file):
+		'''The analyzing starter porcess'''
+		
 		code = read_code(code_file)
 		check_regex(code)
 
