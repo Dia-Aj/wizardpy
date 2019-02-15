@@ -49,23 +49,20 @@ class Regex:
 			return pattern
 
 	@staticmethod
-	def find_matches(pattern, code):
-		'''Find all the matches inside the code. if the function is called 
-		,then there's atleast one valid match. '''
-
-		matches = pattern.finditer(code)
-		code_optimizer.optimize(matches, code)
-
-	@staticmethod
-	def check_data(code_file):
-		code = read_code(code_file)
+	def check_regex(code):
 		for regex in _data:
 			pattern = compile_regex(regex)
-			if(not pattern.search(code)):
-				continue
+			if(not pattern.search(code)): continue
+			else:
+				find_matches(pattern, code)
 
-			find_matches(pattern, code)
+	@staticmethod
+	def main(code_file):
+		code = read_code(code_file)
+		check_regex(code)
 
+def run(code_file):
+	Regex.main(code_file)
 
 if __name__ == '__main__':
 	sys.exit()
