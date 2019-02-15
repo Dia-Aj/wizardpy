@@ -1,4 +1,4 @@
-from analyzer.analyzer import Regex
+from analyzer.analyzer import run
 import sys
 import argparse
 import os
@@ -67,7 +67,7 @@ def run():
 	check_path(file_path)
 	check_code(file_name)
 
-	Regex.find_matches(file_path)
+	run(file_name)
 
 
 if __name__ == '__main__':
