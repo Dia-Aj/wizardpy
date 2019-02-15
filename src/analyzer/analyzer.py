@@ -1,5 +1,6 @@
 from analyzer.expression import exp
 from analyzer.data import regex
+from optimizer.optimizer import code_optimizer
 import sys
 import re
 
@@ -42,6 +43,7 @@ class Regex:
 	@staticmethod
 	def find_matches(pattern, code):
 		matches = pattern.finditer(code)
+		code_optimizer.optimize(matches, code)
 
 	@staticmethod
 	def check_data(code_file):
