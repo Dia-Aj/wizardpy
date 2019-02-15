@@ -1,10 +1,11 @@
-from expression import exp
-from data import regex
+from analyzer.expression import exp
+from analyzer.data import regex
 import sys
 
 data = regex
 
 class Regex:
+	
 	'''Holds all the regular expression inside data.py file
 	   and find all the matches with the passed code then
 	   passes each match to the optimizer individually'''
@@ -21,10 +22,9 @@ class Regex:
 		return Regex._numberOfRegex
 
 	@staticmethod
-	def find_matches(self, string):
-		pass 
+	def find_matches(string):
+		pass
 
 
 if __name__ == '__main__':
 	sys.exit()
-

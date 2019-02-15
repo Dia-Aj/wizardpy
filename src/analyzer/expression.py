@@ -27,5 +27,3 @@ class exp:
 		self.description = description
 		self.pattern = pattern
 
-if __name__ == '__main__':
-	sys.exit()
