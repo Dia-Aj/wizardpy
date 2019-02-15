@@ -31,11 +31,23 @@ class Regex:
 		return content
 
 	@staticmethod
+	def compile_regex(regex):
+		try:
+			pattern = re.compile(regex.pattern)
+		except:
+			print(f'{ERR_RE_MSG}\nName:{regex.name}\nType:{regex.type}')
+		else:
+			return pattern
+
+	@staticmethod
 	def find_matches(code_file):
 		code = read_code(code_file)
 		for regex in _data:
-			if(not re.search(pattern)):
+			pattern = compile_regex(regex)
+			if(not pattern.search(pattern)):
 				continue
+
+			matches = pattern.finditer(code)
 
 
 if __name__ == '__main__':
