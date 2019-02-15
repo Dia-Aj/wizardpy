@@ -40,14 +40,18 @@ class Regex:
 			return pattern
 
 	@staticmethod
-	def find_matches(code_file):
+	def find_matches(pattern, code):
+		matches = pattern.finditer(code)
+
+	@staticmethod
+	def check_data(code_file):
 		code = read_code(code_file)
 		for regex in _data:
 			pattern = compile_regex(regex)
-			if(not pattern.search(pattern)):
+			if(not pattern.search(code)):
 				continue
 
-			matches = pattern.finditer(code)
+			find_matches(pattern, code)
 
 
 if __name__ == '__main__':
