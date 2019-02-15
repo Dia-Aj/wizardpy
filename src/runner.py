@@ -62,8 +62,9 @@ def run():
 
 	(file_path, file_name) = parse()
 	
-	""" required steps before proceeding into the code """
-	check_type(file_name)
+	""" three required phases to check code validity 
+	    before running the analyzer """
+	check_type(file_name) 
 	check_path(file_path)
 	check_code(file_name)
 
