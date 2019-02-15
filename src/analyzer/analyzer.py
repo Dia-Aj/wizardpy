@@ -43,7 +43,6 @@ class Regex:
 	def find_matches(pattern, code):
 		matches = pattern.finditer(code)
 
-
 	@staticmethod
 	def check_data(code_file):
 		code = read_code(code_file)
