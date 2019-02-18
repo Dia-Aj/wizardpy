@@ -15,12 +15,13 @@ class Regex:
 
 	#reads the regular expressions from data.py and 
 	#create object for each regex
-	
+
 	_data = [
 		exp(re, data[re][0], data[re][1], data[re][2])
 		for re in data
 	] #exp(name, type, pattern, description)
 	_numberOfRegex = len(_data) #Count the overall number of the regular expressions
+	fixed_code = '' #Holds the optimized code
 
 	def __len__(self): #returns number of regular expressions 
 		return Regex._numberOfRegex 
@@ -69,6 +70,7 @@ class Regex:
 		'''The analyzing starter porcess'''
 		
 		code = read_code(code_file)
+		Regex.fixed_code = code
 		check_regex(code)
 
 def run(code_file):
