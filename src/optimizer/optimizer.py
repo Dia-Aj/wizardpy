@@ -11,8 +11,6 @@ def log_function(function):
 class code_optimizer:
 	"""takes the passed harmfull code and returns
 	   the idiomatic code"""
-	def __str__(self):
-		pass
 
 	@staticmethod
 	def optimize(matches, regex_name, code):
