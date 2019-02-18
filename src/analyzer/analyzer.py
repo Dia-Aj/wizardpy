@@ -50,11 +50,11 @@ class Regex:
 			return pattern
 
 	@staticmethod
-	def find_matches(pattern, code):
+	def find_matches(pattern, name):
 		"""Find matches the pass the matches to code_optimizer
 		   class."""
 		matches = pattern.finditer(code)
-		fixed_code = code_optimizer.optimize(matches)
+		Regex.fixed_code = code_optimizer.optimize(matches, name, Regex.fixed_code)
 
 	@staticmethod
 	def check_regex(code):
@@ -62,10 +62,10 @@ class Regex:
 		   there validity, then passes the expression to find_matches()
 		   modular if any there's any match.'''
 		for regex in _data:
-			pattern = compile_regex(regex)
+			pattern = compile_regex(regex.pattern)
 			if(not pattern.search(code)): continue
 			else:
-				find_matches(pattern, code)
+				find_matches(pattern, regex.name)
 
 	@staticmethod
 	def main(code_file):
