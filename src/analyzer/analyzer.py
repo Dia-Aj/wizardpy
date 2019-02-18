@@ -49,6 +49,11 @@ class Regex:
 			return pattern
 
 	@staticmethod
+	def find_matches(pattern, code):
+		matches = pattern.finditer(code)
+		fixed_code = code_optimizer.optimize(matches)
+
+	@staticmethod
 	def check_regex(code):
 		'''Run over all the regular expression inside _data and check
 		   there validity, then passes the expression to find_matches()
