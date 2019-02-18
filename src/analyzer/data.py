@@ -1,5 +1,5 @@
 regex = {
-	'space-sep_defining': [
+	'spacesep_defining': [
 		'syntax',
 		r'(\w+\s*=\s*\w+\n*)+',
 		'''

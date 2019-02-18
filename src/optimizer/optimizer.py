@@ -1,4 +1,5 @@
 import sys
+import re
 
 functions = {}
 
@@ -14,11 +15,11 @@ class code_optimizer:
 
 	@staticmethod
 	def optimize(matches, regex_name, code):
-		 new_code = functions[regex_name](matches, code)
+		 new_code = functions['fix_'+regex_name](code_optimizer, matches, code)
 		 return new_code
 
 	@log_function
-	def fix-space-sep_defining(self, matches, code):
+	def fix_spacesep_defining(self, matches, code):
 		harmful = [match.group(0) for match in matches]
 		groups = [a.split() for a in harmful]
 

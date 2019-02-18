@@ -1,4 +1,4 @@
-from analyzer.analyzer import run
+from analyzer.analyzer import run_analyzer
 import sys
 import argparse
 import os
@@ -68,7 +68,7 @@ def run():
 	check_path(file_path)
 	check_code(file_name)
 
-	run(file_name)
+	run_analyzer(file_name)
 
 
 if __name__ == '__main__':

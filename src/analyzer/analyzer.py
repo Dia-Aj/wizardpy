@@ -31,7 +31,7 @@ class Regex:
 		'''Read file content and return it inside a variable'''
 		
 		with open(file) as f:
-			content = file.read()
+			content = f.read()
 
 		return content
 
@@ -47,13 +47,13 @@ class Regex:
 		except:
 			print(f'{ERR_RE_MSG}\nName:{regex.name}\nType:{regex.type}')
 		else:
-			return pattern
+		 	return pattern
 
 	@staticmethod
 	def find_matches(pattern, name):
 		"""Find matches the pass the matches to code_optimizer
 		   class."""
-		matches = pattern.finditer(code)
+		matches = pattern.finditer(Regex.fixed_code)
 		Regex.fixed_code = code_optimizer.optimize(matches, name, Regex.fixed_code)
 
 	@staticmethod
@@ -61,21 +61,25 @@ class Regex:
 		'''Run over all the regular expression inside _data and check
 		   there validity, then passes the expression to find_matches()
 		   modular if any there's any match.'''
-		for regex in _data:
-			pattern = compile_regex(regex.pattern)
+
+		for regex in Regex._data:
+			pattern = Regex.compile_regex(regex)
 			if(not pattern.search(code)): continue
 			else:
-				find_matches(pattern, regex.name)
+				Regex.find_matches(pattern, regex.name)
+
+		with open('optimizedCode.py', 'w') as output:
+			output.write(Regex.fixed_code)
 
 	@staticmethod
 	def main(code_file):
 		'''The analyzing starter porcess'''
 		
-		code = read_code(code_file)
+		code = Regex.read_code(code_file)
 		Regex.fixed_code = code
-		check_regex(code)
+		Regex.check_regex(code)
 
-def run(code_file):
+def run_analyzer(code_file):
 	Regex.main(code_file)
 
 if __name__ == '__main__':
