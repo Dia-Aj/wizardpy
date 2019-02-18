@@ -18,8 +18,23 @@ class code_optimizer:
 		 return new_code
 
 	@log_function
-	def function(self):
-		pass
+	def fix-space-sep_defining(self, matches, code):
+		harmful = [match.group(0) for match in matches]
+		groups = [a.split() for a in harmful]
+
+		for group in groups:
+			string, numeric = group[0], group[2]
+			for i, j in enumerate(group):
+				if(i < 3 or j == '='): continue
+				if(group[i-1] == '='):
+					numeric += f', {j}'
+				else:
+					string += f', {j}'
+			
+			fix = f'{string} = {numeric}\n\n'
+			code = re.sub(harmful[groups.index(group)], fix, code)
+
+		return code
 
 	def sub_code(self, new_string):
 		pass
