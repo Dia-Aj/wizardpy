@@ -51,6 +51,8 @@ class Regex:
 
 	@staticmethod
 	def find_matches(pattern, code):
+		"""Find matches the pass the matches to code_optimizer
+		   class."""
 		matches = pattern.finditer(code)
 		fixed_code = code_optimizer.optimize(matches)
 
