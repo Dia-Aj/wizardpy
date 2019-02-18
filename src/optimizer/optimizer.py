@@ -15,8 +15,9 @@ class code_optimizer:
 		pass
 
 	@staticmethod
-	def optimize():
-		pass
+	def optimize(matches, regex_name, code):
+		 fixed_code = functions[regex_name](matches, code)
+		 return fixed_code
 
 	@log_function
 	def function(self):
