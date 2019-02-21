@@ -3,6 +3,7 @@ from analyzer.data import regex
 from optimizer.optimizer import code_optimizer
 import sys
 import re
+import os
 
 data = regex
 ERR_RE_MSG = 'Error: invalid regular expression'
@@ -57,6 +58,11 @@ class Regex:
 		Regex.fixed_code = code_optimizer.optimize(matches, name, Regex.fixed_code)
 
 	@staticmethod
+	def output_code():
+		with open('optimizedCode.py', 'w') as output:
+			output.write(Regex.fixed_code)
+
+	@staticmethod
 	def check_regex(code):
 		'''Run over all the regular expression inside _data and check
 		   there validity, then passes the expression to find_matches()
@@ -68,8 +74,9 @@ class Regex:
 			else:
 				Regex.find_matches(pattern, regex.name)
 
-		with open('optimizedCode.py', 'w') as output:
-			output.write(Regex.fixed_code)
+		Regex.output_code()
+
+		
 
 	@staticmethod
 	def main(code_file):
