@@ -72,7 +72,7 @@ class Regex:
 		'''Run over all the regular expression inside _data and check
 		   there validity, then passes the expression to find_matches()
 		   modular if any there's any match.'''
-
+		Regex.fixed_code = code
 		for regex in Regex._data:
 			pattern = Regex.compile_regex(regex)
 			if(not pattern.search(code)): continue
@@ -88,7 +88,7 @@ class Regex:
 		'''The analyzing starter porcess'''
 		
 		code = Regex.read_code(code_file)
-		Regex.fixed_code = code
+		
 		Regex.check_regex(code)
 
 def run_analyzer(code_file):
