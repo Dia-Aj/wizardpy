@@ -1,7 +1,7 @@
 regex = {
 	'spacesep_defining': [
 		'syntax',
-		r'(\w+\s*=\s*\w+\n*)+',
+		r'(\w+\s*=\s*\w+\n*){2,5}',
 		'''
 		this regex find variables defined on the following form:-
 			x = 10
