@@ -4,8 +4,8 @@ path = os.path.split(sys.argv[0])[0]
 sys.path.append(
 			'\\'.join(path.split('\\')[:-1]))
 
-from expression import exp
-from data import regex
+from analyzer.expression import exp
+from analyzer.data import regex
 from optimizer.optimizer import code_optimizer
 import re
 
