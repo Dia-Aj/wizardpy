@@ -32,7 +32,7 @@ class code_optimizer:
 				else:
 					string += f', {j}'
 			
-			fix = f'{string} = {numeric}\n\n'
+			fix = f'{string} = {numeric}\n'
 			code = re.sub(harmful[groups.index(group)], fix, code)
 
 		return code
