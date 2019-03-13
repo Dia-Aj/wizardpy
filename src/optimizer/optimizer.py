@@ -24,28 +24,44 @@ class code_optimizer:
 
 	@log_function
 	def fix_spacesep_defining(self, matches, code):
+		"""
+		This method is to fix the multiple lines variables definition
+		 e.g. x = 1
+		 	  y = 2
+		 change to: x, y = 1, 2 
+		"""
+
+		#store the matches with thier spans
 		harmful = [
+			#the span is stored to figure out if the block of 
+			#consecutive variables have ended.
 			(match.group(0), match.span())
 			for match in matches
 		]
+
+		#separate the variables name and value from each others 
 		groups = [a[0].split() for a in harmful]
 		
 		for i, group in enumerate(groups):
-			string, numeric = group[0], group[2]
+			leftmost, rightmost = group[0], group[2]
 			for i, j in enumerate(group):
 				if(i < 3 or j == '='): continue
-				if(group[i-1] == '='):
-					numeric += f', {j}'
+				#if the current item preceded by '=' then its a value
+				#otherwise its a variable name
+				if(group[i-1] == '='): 
+					rightmost += f', {j}'
 				else:
-					string += f', {j}'
+					leftmost += f', {j}'
 			
-			fix = f'{string} = {numeric}\n'
+			fix = f'{leftmost} = {rightmost}\n'
 
 			ind = groups.index(group)
+			#add a newline if the current declariton block has ended
 			if(ind < len(harmful)-1 and 
 						harmful[ind][1][1] != harmful[ind+1][1][0]):
 				fix+='\n'
 			
+			#substitute the harmful code 
 			code = re.sub(harmful[ind][0], fix, code)
 
 		return code
