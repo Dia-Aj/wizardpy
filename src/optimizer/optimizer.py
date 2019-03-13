@@ -3,10 +3,9 @@ import re
 
 functions = {}
 
-"""Log each function into functions dictionary.
-   the rationale behind this is to map harmful 
-   codes into the fixing function by regex name """
 def log_function(function):
+
+	""" Log each function into functions dictionary. """
 	functions.setdefault(function.__name__, function)
 
 def flip(op):
@@ -28,8 +27,7 @@ class code_optimizer:
 		This method is to fix the multiple lines variables definition
 		 e.g. x = 1
 		 	  y = 2
-		 change to: x, y = 1, 2 
-		"""
+		 change to: x, y = 1, 2 """
 
 		#store the matches with thier spans
 		harmful = [
@@ -41,7 +39,6 @@ class code_optimizer:
 
 		#separate the variables name and value from each others 
 		groups = [a[0].split() for a in harmful]
-		
 		for i, group in enumerate(groups):
 			leftmost, rightmost = group[0], group[2]
 			for i, j in enumerate(group):
@@ -68,27 +65,45 @@ class code_optimizer:
 
 	@log_function
 	def fix_chained_comparison(self, matches, code):
+		"""
+			Substitutes 'and' with chained comparison in values
+			comparing
+			e.g. if(y >= z and x<=z)
+			change to: if(y >= z >= x) """
 
 		for match in matches:
-
 			op1, op2 = match.group('OP1'), match.group('OP2')
 			if(match.group(1) == match.group(4)):
 				(left, mid, right) = (match.group(3), 
 											match.group(1), match.group(6))
+				"""
+				z *<=* y and z >= x
+				*<=* must be flipped to *>=* in order to make the 
+				resulting expression valid 
+				---> y *>=* z >= x
+
+				same concept for the other cases 
+
+				"""
 				op1 = flip(op1)
 
 			elif(match.group(1) == match.group(6)):
 				(left, mid, right) = (match.group(3), 
 											match.group(1), match.group(4))
+				# z *<=* y and x *<=* z
+				# y *>=* z *>=* x 
 				(op1, op2) = (flip(op1), flip(op2))
 
 			elif(match.group(3) == match.group(4)):
 				(left, mid, right) = (match.group(1), 
 											match.group(3), match.group(6))
+				#no flipping required
 
 			elif(match.group(3) == match.group(6)):
 				(left, mid, right) = (match.group(1), 
 											match.group(3), match.group(4))
+				# y >= z and x *<=* z
+				# y >= z *>=* x
 				op2 = flip(op2)
 			
 			else:
