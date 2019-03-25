@@ -85,11 +85,12 @@ class code_optimizer:
 			change to: if(y >= z >= x) """
 
 		for match in matches:
-			op1, op2 = match.group('OP1'), match.group('OP2')
+			op1, op2 = map(str.strip, 
+								(match.group('OP1'), match.group('OP2')) )
 
 			if(match.group(1) == match.group(4)):
-				(left, mid, right) = (match.group(3), 
-											match.group(1), match.group(6))
+				(left, mid, right) = map(str.strip, 
+									(match.group(3), match.group(1), match.group(6)) )
 
 				"""If both operators are equal, then it takes only the min/max value
 				   depending on the operator."""
@@ -110,8 +111,8 @@ class code_optimizer:
 				op1 = flip(op1)
 
 			elif(match.group(1) == match.group(6)):
-				(left, mid, right) = (match.group(3), 
-											match.group(1), match.group(4))
+				(left, mid, right) = map(str.strip, 
+									(match.group(3),match.group(1), match.group(4)) )
 				# z *<=* y and x *<=* z
 				# y *>=* z *>=* x
 
@@ -123,8 +124,8 @@ class code_optimizer:
 				(op1, op2) = (flip(op1), flip(op2))
 
 			elif(match.group(3) == match.group(4)):
-				(left, mid, right) = (match.group(1), 
-											match.group(3), match.group(6))
+				(left, mid, right) = map(str.strip,
+									 (match.group(1), match.group(3), match.group(6)) )
 
 				if(operators_is_equal(op1, op2)):
 					code = self.sub_code(match.group(0), 
@@ -134,8 +135,8 @@ class code_optimizer:
 				#no flipping required
 
 			elif(match.group(3) == match.group(6)):
-				(left, mid, right) = (match.group(1), 
-											match.group(3), match.group(4))
+				(left, mid, right) = map(str.strip, 
+									(match.group(1), match.group(3), match.group(4)))
 				# y >= z and x *<=* z
 				# y >= z *>=* x
 				if(operators_is_equal(op1, op2)):
@@ -167,7 +168,7 @@ class code_optimizer:
 
 			#Split each comparsion from '==' operator
 			for comp in offset:
-				(name, value) = (comp.split('=='))
+				(name, value) = map(str.strip, (comp.split('==')) )
 				result[name].append(value)
 	
 			fix = ''
@@ -175,7 +176,7 @@ class code_optimizer:
 			#fix the comparsion for each key in the dictionary individually
 			for name in result:
 				if(fix != ''): fix+=' or '
-				fix+=f"{name}in ({','.join(list(set(result[name])))})"
+				fix+=f"{name} in ({','.join(list(set(result[name])))})"
 
 			code = self.sub_code(match.group(0), fix, code)
 
