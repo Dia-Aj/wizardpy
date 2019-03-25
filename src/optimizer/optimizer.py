@@ -86,11 +86,11 @@ class code_optimizer:
 
 		for match in matches:
 			op1, op2 = map(str.strip, 
-								(match.group('OP1'), match.group('OP2')) )
+					(match.group('OP1'), match.group('OP2')) )
 
 			if(match.group(1) == match.group(4)):
 				(left, mid, right) = map(str.strip, 
-									(match.group(3), match.group(1), match.group(6)) )
+							(match.group(3), match.group(1), match.group(6)) )
 
 				"""If both operators are equal, then it takes only the min/max value
 				   depending on the operator."""
@@ -112,7 +112,7 @@ class code_optimizer:
 
 			elif(match.group(1) == match.group(6)):
 				(left, mid, right) = map(str.strip, 
-									(match.group(3),match.group(1), match.group(4)) )
+							(match.group(3),match.group(1), match.group(4)) )
 				# z *<=* y and x *<=* z
 				# y *>=* z *>=* x
 
@@ -125,7 +125,7 @@ class code_optimizer:
 
 			elif(match.group(3) == match.group(4)):
 				(left, mid, right) = map(str.strip,
-									 (match.group(1), match.group(3), match.group(6)) )
+							(match.group(1), match.group(3), match.group(6)) )
 
 				if(operators_is_equal(op1, op2)):
 					code = self.sub_code(match.group(0), 
@@ -136,7 +136,7 @@ class code_optimizer:
 
 			elif(match.group(3) == match.group(6)):
 				(left, mid, right) = map(str.strip, 
-									(match.group(1), match.group(3), match.group(4)))
+							(match.group(1), match.group(3), match.group(4)))
 				# y >= z and x *<=* z
 				# y >= z *>=* x
 				if(operators_is_equal(op1, op2)):
