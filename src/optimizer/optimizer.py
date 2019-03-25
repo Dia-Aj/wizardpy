@@ -169,8 +169,9 @@ class code_optimizer:
 		return code
 
 
-	def sub_code(self, new_string):
-		pass
+	def sub_code(self, harmful_match, match_fix, code):
+		code = re.sub(harmful_match, match_fix, code)
+		return code
 
 
 if __name__ == '__main__':
