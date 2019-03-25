@@ -13,6 +13,18 @@ def flip(op):
 	flipped_ops = {'>':'<', '<': '>', '>=' : '<=', '<=' : '>='}
 	return flipped_ops[op]
 
+def operators_is_equal(op1, op2):
+	return op1 == op2
+
+def fix_equal_operators(op, mid_var, left_value, right_value):
+	if(op == '>'):
+		fix = f'{mid_var} > {max(left_value, right_value)}'
+	elif(op == '<'):
+		fix = f'{mid_var} < {min(left_value, right_value)}'
+
+	return fix
+
+
 class code_optimizer:
 	"""takes the passed harmfull code and returns
 	   the idiomatic code"""
@@ -74,6 +86,7 @@ class code_optimizer:
 
 		for match in matches:
 			op1, op2 = match.group('OP1'), match.group('OP2')
+
 			if(match.group(1) == match.group(4)):
 				(left, mid, right) = (match.group(3), 
 											match.group(1), match.group(6))
@@ -86,18 +99,34 @@ class code_optimizer:
 				same concept for the other cases 
 
 				"""
+				if(operators_is_equal(op1, op2)):
+					code = re.sub(match.group(0), 
+						          fix_equal_operators(op1, mid, left, right), code)
+					break
+
 				op1 = flip(op1)
 
 			elif(match.group(1) == match.group(6)):
 				(left, mid, right) = (match.group(3), 
 											match.group(1), match.group(4))
 				# z *<=* y and x *<=* z
-				# y *>=* z *>=* x 
+				# y *>=* z *>=* x
+				if(operators_is_equal(op1, op2)):
+					code = re.sub(match.group(0), 
+						          fix_equal_operators(op1, mid, left, right), code)
+					break
+
 				(op1, op2) = (flip(op1), flip(op2))
 
 			elif(match.group(3) == match.group(4)):
 				(left, mid, right) = (match.group(1), 
 											match.group(3), match.group(6))
+
+				if(operators_is_equal(op1, op2)):
+					code = re.sub(match.group(0), 
+						          fix_equal_operators(op1, mid, left, right), code)
+					break
+
 				#no flipping required
 
 			elif(match.group(3) == match.group(6)):
@@ -105,6 +134,11 @@ class code_optimizer:
 											match.group(3), match.group(4))
 				# y >= z and x *<=* z
 				# y >= z *>=* x
+				if(operators_is_equal(op1, op2)):
+					code = re.sub(match.group(0), 
+						          fix_equal_operators(op1, mid, left, right), code)
+					break
+
 				op2 = flip(op2)
 			
 			else:
@@ -131,7 +165,7 @@ class code_optimizer:
 				fix+=f"{name}in ({','.join(list(set(result[name])))})"
 
 			code = re.sub(match.group(0), fix, code)
-			
+
 		return code
 
 
