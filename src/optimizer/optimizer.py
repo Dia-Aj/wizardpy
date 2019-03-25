@@ -90,6 +90,14 @@ class code_optimizer:
 			if(match.group(1) == match.group(4)):
 				(left, mid, right) = (match.group(3), 
 											match.group(1), match.group(6))
+
+				"""If both operators are equal, then it takes only the min/max value
+				   depending on the operator."""
+				if(operators_is_equal(op1, op2)):
+					code = self.sub_code(match.group(0), 
+						          fix_equal_operators(op1, mid, left, right), code)
+					continue
+
 				"""
 				z *<=* y and z >= x
 				*<=* must be flipped to *>=* in order to make the 
@@ -99,11 +107,6 @@ class code_optimizer:
 				same concept for the other cases 
 
 				"""
-				if(operators_is_equal(op1, op2)):
-					code = self.sub_code(match.group(0), 
-						          fix_equal_operators(op1, mid, left, right), code)
-					continue
-
 				op1 = flip(op1)
 
 			elif(match.group(1) == match.group(6)):
@@ -111,6 +114,7 @@ class code_optimizer:
 											match.group(1), match.group(4))
 				# z *<=* y and x *<=* z
 				# y *>=* z *>=* x
+
 				if(operators_is_equal(op1, op2)):
 					code = self.sub_code(match.group(0), 
 						          fix_equal_operators(op1, mid, left, right), code)
@@ -152,14 +156,23 @@ class code_optimizer:
 
 	@log_function
 	def fix_repeated_variable_or_comparsion(self, matches, code):
+		"""Substitute long or '==' comparsion for the same variable with 
+		  'in' operator and parenthesis. """
 		for match in matches:
 			offset = match.group(0).split(' or ')
+
+			#Create a list for each variable, if the statement contains multiple
+			#variables and repeated comparsion 
 			result = defaultdict(list)
-			for d in offset:
-				(name, value) = (d.split('=='))
+
+			#Split each comparsion from '==' operator
+			for comp in offset:
+				(name, value) = (comp.split('=='))
 				result[name].append(value)
 	
 			fix = ''
+
+			#fix the comparsion for each key in the dictionary individually
 			for name in result:
 				if(fix != ''): fix+=' or '
 				fix+=f"{name}in ({','.join(list(set(result[name])))})"
