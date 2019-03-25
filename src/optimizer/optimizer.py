@@ -1,5 +1,6 @@
 import sys
 import re
+from collections import defaultdict
 
 functions = {}
 
@@ -113,6 +114,26 @@ class code_optimizer:
 			code = re.sub(match.group(0), fix, code)
 
 		return code
+
+
+	@log_function
+	def fix_repeated_variable_or_comparsion(self, matches, code):
+		for match in matches:
+			offset = match.group(0).split(' or ')
+			result = defaultdict(list)
+			for d in offset:
+				(name, value) = (d.split('=='))
+				result[name].append(value)
+	
+			fix = ''
+			for name in result:
+				if(fix != ''): fix+=' or '
+				fix+=f"{name}in ({','.join(list(set(result[name])))})"
+
+			code = re.sub(match.group(0), fix, code)
+			
+		return code
+
 
 	def sub_code(self, new_string):
 		pass
