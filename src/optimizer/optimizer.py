@@ -72,7 +72,7 @@ class code_optimizer:
 				fix+='\n'
 			
 			#substitute the harmful code 
-			code = re.sub(harmful[ind][0], fix, code)
+			code = self.sub_code(harmful[ind][0], fix, code)
 
 		return code
 
@@ -100,9 +100,9 @@ class code_optimizer:
 
 				"""
 				if(operators_is_equal(op1, op2)):
-					code = re.sub(match.group(0), 
+					code = self.sub_code(match.group(0), 
 						          fix_equal_operators(op1, mid, left, right), code)
-					break
+					continue
 
 				op1 = flip(op1)
 
@@ -112,9 +112,9 @@ class code_optimizer:
 				# z *<=* y and x *<=* z
 				# y *>=* z *>=* x
 				if(operators_is_equal(op1, op2)):
-					code = re.sub(match.group(0), 
+					code = self.sub_code(match.group(0), 
 						          fix_equal_operators(op1, mid, left, right), code)
-					break
+					continue
 
 				(op1, op2) = (flip(op1), flip(op2))
 
@@ -123,9 +123,9 @@ class code_optimizer:
 											match.group(3), match.group(6))
 
 				if(operators_is_equal(op1, op2)):
-					code = re.sub(match.group(0), 
+					code = self.sub_code(match.group(0), 
 						          fix_equal_operators(op1, mid, left, right), code)
-					break
+					continue
 
 				#no flipping required
 
@@ -135,9 +135,9 @@ class code_optimizer:
 				# y >= z and x *<=* z
 				# y >= z *>=* x
 				if(operators_is_equal(op1, op2)):
-					code = re.sub(match.group(0), 
+					code = self.sub_code(match.group(0), 
 						          fix_equal_operators(op1, mid, left, right), code)
-					break
+					continue
 
 				op2 = flip(op2)
 			
@@ -145,7 +145,7 @@ class code_optimizer:
 				continue
 				
 			fix = f'{left} {op1} {mid} {op2} {right}'
-			code = re.sub(match.group(0), fix, code)
+			code = self.sub_code(match.group(0), fix, code)
 
 		return code
 
@@ -164,12 +164,12 @@ class code_optimizer:
 				if(fix != ''): fix+=' or '
 				fix+=f"{name}in ({','.join(list(set(result[name])))})"
 
-			code = re.sub(match.group(0), fix, code)
+			code = self.sub_code(match.group(0), fix, code)
 
 		return code
 
-
-	def sub_code(self, harmful_match, match_fix, code):
+	@staticmethod
+	def sub_code(harmful_match, match_fix, code):
 		code = re.sub(harmful_match, match_fix, code)
 		return code
 
