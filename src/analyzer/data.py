@@ -14,7 +14,7 @@ regex = {
 
 	'chained_comparison': [
 		'syntax',
-		r'(\w+)\s*(?P<OP1>[<=>]+)\s*(\w+)\s*and\s*(\w)+\s*(?P<OP2>[<=>]+)\s*(\w)+',
+		r'(\w+)\s*(?P<OP1>[<=>]+)\s*(\w+)\s*and\s*(\w)+\s*(?P<OP2>[<=>]+)\s*(\w+)',
 		'''
 			if(y >= z and x<=z):
 		fix to
@@ -31,6 +31,6 @@ regex = {
 
 		'''
 	],
-	
+
 
 }
