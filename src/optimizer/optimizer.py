@@ -184,8 +184,13 @@ class code_optimizer:
 
 	@log_function
 	def fix_inline_if_statement(self, matches, code):
+		"""Reformat inline if statement"""
+
 		for match in matches:
+			#seperate between the if condition and the body with
+			#new-line and a single TAB
 			fix = f'{match.group(1)}:\n\t{match.group(2)}'
+
 			code = self.sub_code(match.group(0), fix, code)
 
 		return code
