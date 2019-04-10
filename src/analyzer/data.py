@@ -43,4 +43,19 @@ regex = {
 		'''
 	],
 
+	'naive_index_loop': [
+		'syntax',
+		r'(?P<statment>for\s+(?P<var_name>\w+)\s+in\s+range[(]{1}len[(]{1}'\
+								r'(?P<container_name>\w+)[)]{2}:)(?P<body>(\n\t.*)+)',
+		'''
+			my_container = ['Larry', 'Moe', 'Curly']
+
+			for i in range(len(my_container)):
+				print(f'{i}: {my_container[i]}')
+		fix to
+			for i, element in enumerate(my_container):
+    			print(f'{i}: {element}')
+		'''
+	],
+
 }

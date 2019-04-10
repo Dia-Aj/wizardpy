@@ -190,6 +190,25 @@ class code_optimizer:
 
 		return code
 
+	@log_function
+	def fix_naive_index_loop(self, matches, code):
+		for match in matches:
+			(fix, var, container,
+					body, statment) = ( match.group(0),
+				 						match.group("var_name"),
+										match.group("container_name"), 
+										match.group("body"),
+										match.group("statment")
+			)
+			fix_statment = f'for {var}, element in enumerate({container}):'
+			fix_body = body.replace(f'{container}[{var}]', 'element')
+			fix = fix.replace(statment, fix_statment)
+			fix = fix.replace(body, fix_body)
+
+			code = self.sub_code(match.group(0), fix, code)
+
+		return code
+
 	@staticmethod
 	def sub_code(harmful_match, match_fix, code):
 		code = code.replace(harmful_match, match_fix)
