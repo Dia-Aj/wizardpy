@@ -179,6 +179,14 @@ class code_optimizer:
 				fix+=f"{name} in ({','.join(list(set(result[name])))})"
 
 			code = self.sub_code(match.group(0), fix, code)
+			
+		return code
+
+	@log_function
+	def fix_inline_if_statement(self, matches, code):
+		for match in matches:
+			fix = f'{match.group(1)}:\n\t{match.group(2)}'
+			code = self.sub_code(match.group(0), fix, code)
 
 		return code
 

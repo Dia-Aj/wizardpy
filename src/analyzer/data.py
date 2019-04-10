@@ -21,6 +21,17 @@ regex = {
 			if(y >= z >= x): '''
 	],
 
+	'inline_if_statement': [
+		'format',
+		r'(if?.+):(.+[^\n])',
+		'''
+			if(name == 'John'): print(name)
+		fix to
+			if(name == 'John'):
+				print(name)
+		'''
+	],
+
 	'repeated_variable_or_comparsion': [
 		'conditional',
 		r'(\w+\s*==\s*[\'\"]?[A-Za-z0-9\.]+[\'\"]?\s*(or)?\s*)+',
@@ -31,6 +42,5 @@ regex = {
 
 		'''
 	],
-
 
 }
