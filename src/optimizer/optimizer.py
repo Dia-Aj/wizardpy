@@ -179,7 +179,7 @@ class code_optimizer:
 				fix+=f"{name} in ({','.join(list(set(result[name])))})"
 
 			code = self.sub_code(match.group(0), fix, code)
-			
+
 		return code
 
 	@log_function
@@ -192,7 +192,7 @@ class code_optimizer:
 
 	@staticmethod
 	def sub_code(harmful_match, match_fix, code):
-		code = re.sub(harmful_match, match_fix, code)
+		code = code.replace(harmful_match, match_fix)
 		return code
 
 
