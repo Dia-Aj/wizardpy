@@ -197,6 +197,7 @@ class code_optimizer:
 
 	@log_function
 	def fix_naive_index_loop(self, matches, code):
+		""" Fixes naive range(len(arr)) for loop to enumerate"""		
 		for match in matches:
 			(fix, var, container,
 					body, statment) = ( match.group(0),
@@ -205,7 +206,11 @@ class code_optimizer:
 										match.group("body"),
 										match.group("statment")
 			)
+			#'element' is a random name given for the array elements
+			#reformat the condition statment.
 			fix_statment = f'for {var}, element in enumerate({container}):'
+
+			#replace each naive call by indices with 'element' variable
 			fix_body = body.replace(f'{container}[{var}]', 'element')
 			fix = fix.replace(statment, fix_statment)
 			fix = fix.replace(body, fix_body)
