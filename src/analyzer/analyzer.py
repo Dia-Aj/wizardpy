@@ -49,7 +49,7 @@ class Regex:
 			check the other regular expressions. '''
 		
 		try:
-			pattern = re.compile(regex.pattern)
+			pattern = re.compile(regex.pattern, re.VERBOSE)
 		except:
 			print(f'{ERR_RE_MSG}\nName:{regex.name}\nType:{regex.type}')
 		else:
