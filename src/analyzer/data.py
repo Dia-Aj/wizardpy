@@ -58,4 +58,25 @@ regex = {
 		'''
 	],
 
+	'naive_container_loop':[
+		'syntax',
+	    '''  
+        (?P<main_loop>for\s+                                             #for                
+      	(?P<iterator>\w+)\s+in\s+                                        #iterator in
+      	(?P<sequence>range(.+)|\(.+\)|\{.+\}|\[.+\]|\w+)):\s             #sequence
+      	\s*(?P<condition>if\(.+\):)?\s*                                  #condition_statment(optional)
+      	\s(?P<container>\w+)\.append(.+)                                 #container.append(...)
+      	''',
+      	''' 
+      		container = [1, 2, 3]
+      		for i in range(5):
+      			if(i % 2 == 0):
+      				container.append(i)
+      	fix to
+      		container = container + [i for i in range(5) if(i % 2 == 0)]
+
+      	'''
+
+	]
+
 }
