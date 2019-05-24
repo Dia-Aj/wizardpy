@@ -250,6 +250,21 @@ class code_optimizer:
 
         return code
 
+	@log_function
+	def fix_strings_concat(self, matches, code):
+		for match in matches:
+			h_exp = match.group("expression")
+			container = h_exp.split('+')
+			container = [el.strip().replace(el.strip()[0], '') if el.strip()[0] in ('\"', "'")
+				else "{leftpar}{var}{rightpar}".format(
+					leftpar = '{', var = el.strip(), rightpar = '}')
+				for el in container]
+
+			fix = "{}{}{}".format('f\"', ''.join(container), "\"")
+			code = self.sub_code(match.group(0), fix, code)
+
+		return code    
+
     @staticmethod
     def sub_code(harmful_match, match_fix, code):
         code = code.replace(harmful_match, match_fix)

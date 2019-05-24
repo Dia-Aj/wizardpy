@@ -76,7 +76,25 @@ regex = {
       		container = container + [i for i in range(5) if(i % 2 == 0)]
 
       	'''
+	],
 
-	]
+    'strings_concat':[
+		'syntax', 
+		'''
+         print[(](?P<expression>(				 #match sequence of string concatination 
+			    (
+			    	(["]([^"].*)["] |         	 #match double quotation string ("string")
+             		[']([^'].*)[']) | 			 #match single quotation string ('string')
+             		\w+							 #match a variable
+             	)\s*[+]?\s*     				 
+         )*)[)]
+        ''',
+		'''
+		 	band = "The Beatles"
+		 	print("My favorite band  is " + band)
+		fix to
+			print(f'My favorite band is {band}')
+		'''
+	],  
 
 }
