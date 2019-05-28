@@ -120,4 +120,31 @@ regex = {
 		'''
 	],
 
+	'list_joining':[
+		'syntax',
+		'''
+			(\s*(\w+)\s*=.+\s*)?
+			for\s*(?P<element>\w+)\s*in\s*(?P<container>\w+)\s*:\s*                             # matches for element in container
+            (if\s*[(]?\s*(?P<condition>.+)\s*[)]?\s*:\s*)?                                      # matches if statment if it exists
+
+            (# match two forms of concatination     
+            	( (?P<variable_f1>\w+)\s*[+]=\s*(?P<value_f1>\w+)\s* )|                         # matches form one: variable += element
+            	( (?P<variable_f2>\w+)\s*=\s*(?P=variable_f2)\s*[+]\s*(?P<value_f2>\w+)\s* )    # matches form two: variable = variable + element
+            )
+		''',
+		'''
+		for element in container:
+    		result += element
+    	fix to
+    		result = ''.join(container)
+
+    	for element in result_list:
+    		if condition:
+        		result = result + element
+        fix to
+        	result = ''.join([i if condition for i in container])
+		'''
+
+	],
+
 }
