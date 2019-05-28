@@ -104,7 +104,7 @@ regex = {
 		(?<!el)if\s*[(]?\s*(?P<condition>.+)\s*[)]?\s*:\s*         	 	#condition statment,
                                                                     	#(?<!el) -> negative look behind to avoid matching elif
         (?P<variable_name>\w+)\s*=\s*(?P<variable_value1>.+)\s*     	#value for first condition
-        else:\s*                                                    
+        else\s*:\s*                                                    
         (?P=variable_name)\s*=\s*(?P<variable_value2>.+)\s*         	#value if the first condition isn't statisfied
 
 		''',
