@@ -81,12 +81,13 @@ regex = {
     'strings_concat':[
 		'syntax', 
 		'''
-         print[(](?P<expression>(				 #match sequence of string concatination 
-			    (
-			    	(["]([^"].*)["] |         	 #match double quotation string ("string")
-             		[']([^'].*)[']) | 			 #match single quotation string ('string')
-             		\w+							 #match a variable
-             	)\s*[+]?\s*     				 
+        print[(](?P<expression>(				 						#match sequence of string concatination 
+			(
+			  	(["]([^"].*)["] |         	 							#match double quotation string ("string")
+             	[']([^'].*)[']) | 			 							#match single quotation string ('string')
+             	\w+														#match a variable
+             								 							
+             )\s*[+]?\s*     				 
          )*)[)]
         ''',
 		'''
@@ -95,6 +96,6 @@ regex = {
 		fix to
 			print(f'My favorite band is {band}')
 		'''
-	],  
+	],
 
 }
