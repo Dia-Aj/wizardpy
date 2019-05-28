@@ -278,6 +278,26 @@ class code_optimizer:
 
 		return code
 
+	@log_function
+	def fix_list_joining(self, matches, code):
+		for match in matches:
+			grp = lambda x: match.group(x) #shorthand function for fast accessing
+
+			element, container = grp('element'), grp('container')
+			variable = grp('variable_f1') if grp('variable_f1') else grp('variable_f2')
+			value = grp('value_f1') if grp('value_f1') else grp('value_f2')
+
+			if(grp('condition')): # condition has been matched
+				condition = grp('condition')
+				fix = f"\n{variable} = ''.join([i if {condition} for i in {container}])"
+			
+			else: # no condition has been matched
+				fix = f"\n{variable} = ''.join(container)"
+
+			code = self.sub_code(match.group(0), fix, code)
+
+		return code			
+
 	@staticmethod
 	def sub_code(harmful_match, match_fix, code):
 		code = code.replace(harmful_match, match_fix)
