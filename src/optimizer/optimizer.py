@@ -273,7 +273,7 @@ class code_optimizer:
 										grp('variable_name'), grp('variable_value1'),
 										grp('variable_value2'), grp('condition'))
 
-			fix = f'{variable} = {value1} if {condition} else {value2}'
+			fix = f'{variable} = {value1} if {condition} else {value2}\n'
 			code = self.sub_code(match.group(0), fix, code)
 
 		return code
