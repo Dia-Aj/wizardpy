@@ -265,6 +265,19 @@ class code_optimizer:
 
 		return code    
 
+	@log_function
+	def fix_inline_variable_assignment(self, matches, code):
+		for match in matches:
+			grp = lambda x: match.group(x)
+			(variable, value1, value2, condition) = (
+										grp('variable_name'), grp('variable_value1'),
+										grp('variable_value2'), grp('condition'))
+
+			fix = f'{variable} = {value1} if {condition} else {value2}'
+			code = self.sub_code(match.group(0), fix, code)
+
+		return code
+
 	@staticmethod
 	def sub_code(harmful_match, match_fix, code):
 		code = code.replace(harmful_match, match_fix)
