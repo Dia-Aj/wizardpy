@@ -28,4 +28,5 @@ Wizardpy is a command-line tool to optimize python code speed and format by dete
 ## Technology
 
 The application works mainly on regular expressions by dectecting harmful code pattern and replacing it with an optimal equivalent.
+
 Wizardpy works on python built-in packages, there's no extra dependences you need to install.
