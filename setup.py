@@ -9,7 +9,7 @@ setup(
                         ' get the most out of your code for an effecient performance'),   
   author = 'Diaa Abujaber',
   author_email = 'diaa1999abujaber@gmail.com',
-  url = 'https://github.com/DiaaAj',
+  url = 'https://github.com/DiaaAj/wizardpy',
   download_url = 'https://github.com/DiaaAj/wizardpy/archive/v_01.tar.gz',
   keywords = [
       'pythonic code', 'effecient python code',
