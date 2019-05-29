@@ -1,7 +1,9 @@
 regex = {
 	'spacesep_defining': [
 		'syntax',
-		r'(\w+\s*=\s*\w+\n*){2,5}',
+		r'''
+		(\s*(?P<variable>\w+)\s*=\s*["']?(?P<value>\w+)["']?\s*){2,5} #matches sequence of variable = value
+		''',
 
 		'''
 			x = 10
@@ -45,8 +47,12 @@ regex = {
 
 	'naive_index_loop': [
 		'syntax',
-		r'(?P<statment>for\s+(?P<var_name>\w+)\s+in\s+range[(]{1}len[(]{1}'\
-								r'(?P<container_name>\w+)[)]{2}:)(?P<body>(\n\t.*)+)',
+		r'''
+		(?P<statment>for\s+												# for
+		(?P<var_name>\w+)\s+in\s+range[(]{1}len[(]{1}					# var_name in range(len(
+		(?P<container_name>\w+)[)]{2}:)									# container_name)):
+		(?P<body>(\n\t.*)+)												#body loop
+		''',
 		'''
 			my_container = ['Larry', 'Moe', 'Curly']
 
@@ -60,7 +66,7 @@ regex = {
 
 	'naive_container_loop':[
 		'syntax',
-	    '''  
+	    r'''  
         (?P<main_loop>for\s+                                             #for                
       	(?P<iterator>\w+)\s+in\s+                                        #iterator in
       	(?P<sequence>range(.+)|\(.+\)|\{.+\}|\[.+\]|\w+)):\s             #sequence
@@ -80,7 +86,7 @@ regex = {
 
     'strings_concat':[
 		'syntax', 
-		'''
+		r'''
         print[(](?P<expression>(				 						#match sequence of string concatination 
 			(
 			  	(["]([^"].*)["] |         	 							#match double quotation string ("string")
@@ -100,7 +106,7 @@ regex = {
 
 	'inline_variable_assignment':[
 		'syntax',
-		'''
+		r'''
 		(?<!el)if\s*[(]?\s*(?P<condition>.+)\s*[)]?\s*:\s*         	 	#condition statment,
                                                                     	#(?<!el) -> negative look behind to avoid matching elif
         (?P<variable_name>\w+)\s*=\s*(?P<variable_value1>.+)\s*     	#value for first condition
@@ -122,7 +128,7 @@ regex = {
 
 	'list_joining':[
 		'syntax',
-		'''
+		r'''
 			(\s*(\w+)\s*=.+\s*)?
 			for\s*(?P<element>\w+)\s*in\s*(?P<container>\w+)\s*:\s*                             # matches for element in container
             (if\s*[(]?\s*(?P<condition>.+)\s*[)]?\s*:\s*)?                                      # matches if statment if it exists

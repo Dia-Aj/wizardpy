@@ -63,7 +63,7 @@ class code_optimizer:
 				else:
 					leftmost += f', {j}'
 			
-			fix = f'{leftmost} = {rightmost}\n'
+			fix = f'\n{leftmost} = {rightmost}'
 
 			ind = groups.index(group)
 			#add a newline if the current declariton block has ended
@@ -260,7 +260,7 @@ class code_optimizer:
 					leftpar = '{', var = el.strip(), rightpar = '}')
 				for el in container]
 
-			fix = "print({}{}{})".format('f\"', ''.join(container), "\"")
+			fix = "\nprint({}{}{})".format('f\"', ''.join(container), "\"")
 			code = self.sub_code(match.group(0), fix, code)
 
 		return code    
