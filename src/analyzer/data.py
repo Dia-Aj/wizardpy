@@ -36,7 +36,7 @@ regex = {
 
 	'repeated_variable_or_comparsion': [
 		'conditional',
-		r'(\w+\s*==\s*[\'\"]?[A-Za-z0-9\.]+[\'\"]?\s*(or)?\s*)+',
+		r'(\s*(?P<variable>\w+)\s*==\s*(?P<value1>.+)\s*(or)?\s*){2}',
 		'''
 			if(x == 1 or x == 2 or x == 3):
 		fix to
