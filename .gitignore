@@ -2,5 +2,5 @@
 __pycache__/
 *.py[cod]
 *$py.class
-src/test.py
-src/optimizedCode.py
+wizardpy/test.py
+wizardpy/optimizedCode.py
