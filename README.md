@@ -1,11 +1,11 @@
 # Wizardpy
 **Python to pythonic code converter, get the most out of your code**
 
-Why to write extra lines
+Why to write extra lines\n
 ![Placeholder Demo](docs/imgbefore.PNG)
 
-when it could be done effeciently with a single line.
-![Placeholder Demo](docs/imgbefore.PNG)
+when it could be done effeciently with a single line.\n
+![Placeholder Demo](docs/<imgafter>.PNG)
 ## Installation
 
 >Requires Python 3.0 or higher.
