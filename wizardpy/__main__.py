@@ -1,4 +1,9 @@
-from wizardpy import main
+"""runs runner.py to start parsing the arguments"""
 
-if __name__ == "__main__":
-    main()
+from wizardpy import runner
+
+def main():
+	runner.run() 
+
+if __name__ == '__main__':
+        main()
