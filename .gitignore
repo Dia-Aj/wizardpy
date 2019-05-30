@@ -4,3 +4,5 @@ __pycache__/
 *$py.class
 wizardpy/test.py
 wizardpy/optimizedCode.py
+MANIFEST
+dist/
