@@ -9,24 +9,20 @@ when it could be done effeciently with a single line.
 
 <img src="docs/imgafter.PNG" alt="Placeholder Demo" height = "80" width = "485" />
 
-## Installation
-
->Requires Python 3.0 or higher.
-
- **MacOS and Windows.**
- 
-`$ pip install wizardpy`
-
-**or apt-get if you're using Linux:**
-
-`$ sudo apt-get install wizardpy`
-
 ## Usage
 
 Wizardpy is a command-line tool to optimize python code speed and format by detecting common harmful behaviours.
+
+>Requires Python 3.0 or higher.
+
+
+**Usage instructions:-**
+Open wizrdpy directory and type
+
+    python wizardpy -P fileAddress filename.py
 
 ## Technology
 
 The application works mainly on regular expressions by dectecting harmful code pattern and replacing it with an optimal equivalent.
 
-Wizardpy works on python built-in packages, there's no extra dependences you need to install.
+Wizardpy works on python built-in packages, there's no extra dependences are required.
