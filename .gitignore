@@ -6,3 +6,4 @@ wizardpy/test.py
 wizardpy/optimizedCode.py
 MANIFEST
 dist/
+setup
